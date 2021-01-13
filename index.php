@@ -16,14 +16,18 @@
 
 <body>
     <h3>Latihan 1</h3>
-    <!-- tambah button -->
+    <input type="text" placeholder="Pencarian" id="keyword">
     <button id="btn">Ambil Data</button>
-    <li id="result"></li>
+    <li>Nama : <strong id="result"></strong></li>
     <script>
         function load_ajax() {
             const ajax = new XMLHttpRequest()
-            // kirimkan data keyword ke data.php menggunakan method GET
-            ajax.open('GET', './src/data.php?keyword=kirimdata', true)
+
+            // pilih id inputnya, dan apapun inputan dari user akan diambil nilanya (value)
+            let text = document.getElementById('keyword').value
+            // kirimkan data menggunakan javascript, pakai concat text yang diambil dari input html
+            ajax.open('GET', './src/data.php?keyword=' + text, true)
+
             ajax.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     // let data = JSON.parse(this.responseText)
