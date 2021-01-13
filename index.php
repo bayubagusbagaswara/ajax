@@ -22,19 +22,20 @@
     <script>
         function load_ajax() {
             const ajax = new XMLHttpRequest()
-
-            // pilih id inputnya, dan apapun inputan dari user akan diambil nilanya (value)
             let text = document.getElementById('keyword').value
-            // kirimkan data menggunakan javascript, pakai concat text yang diambil dari input html
-            ajax.open('GET', './src/data.php?keyword=' + text, true)
+            let data = 'keyword=' + text
+            // POST
+            ajax.open('POST', './src/data.php', true)
+            // untuk POST tambahkan fungsi dibawah agar bisa mengirimkan data
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
             ajax.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
-                    // let data = JSON.parse(this.responseText)
                     document.getElementById('result').textContent = this.responseText
                 }
             }
-            ajax.send()
+            // masukkan data sebagai parameter send
+            ajax.send(data)
         }
         // jika diklik maka panggil load_ajax
         document.getElementById('btn').onclick = function() {
