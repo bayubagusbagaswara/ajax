@@ -18,18 +18,15 @@
     <h3>Latihan 1</h3>
     <!-- tambah button -->
     <button id="btn">Ambil Data</button>
-    <li>Nama : <strong id="result"></strong></li>
+    <li id="result"></li>
     <script>
         function load_ajax() {
             const ajax = new XMLHttpRequest()
-            // bisa ambil data selain JSON, misal .txt .php
-            ajax.open('GET', './src/data.txt', true)
+            // kirimkan data keyword ke data.php menggunakan method GET
+            ajax.open('GET', './src/data.php?keyword=kirimdata', true)
             ajax.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
-                    // tampilkan data .json
                     // let data = JSON.parse(this.responseText)
-                    // masukkan data ke element by id
-                    // tidak melalui Parse, karena data.txt bentuknya text
                     document.getElementById('result').textContent = this.responseText
                 }
             }
