@@ -16,24 +16,29 @@
 
 <body>
     <h3>Latihan 1</h3>
+    <!-- tambah button -->
+    <button id="btn">Ambil Data</button>
     <li>Nama : <strong id="result"></strong></li>
     <script>
         function load_ajax() {
-            // buat object Ajaxnya yg sudah tertanam di browser
             const ajax = new XMLHttpRequest()
-            // metod ambil data, sumber datanya, mau proses async atau tidak
-            ajax.open('GET', './src/data.json', true)
+            // bisa ambil data selain JSON, misal .txt .php
+            ajax.open('GET', './src/data.txt', true)
             ajax.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     // tampilkan data .json
-                    let data = JSON.parse(this.responseText)
-                    document.getElementById('result').textContent = data.gender
+                    // let data = JSON.parse(this.responseText)
+                    // masukkan data ke element by id
+                    // tidak melalui Parse, karena data.txt bentuknya text
+                    document.getElementById('result').textContent = this.responseText
                 }
             }
             ajax.send()
         }
-        // panggil ajax
-        load_ajax()
+        // jika diklik maka panggil load_ajax
+        document.getElementById('btn').onclick = function() {
+            load_ajax()
+        }
     </script>
 </body>
 
